@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# start, build, stop, ssh (vpn)
+show_help() {
+    echo "Usage: auto-vm-ssh [options]"
+    echo "Options:"
+    echo "  -h, --help            show help message"
+    echo "  -start                start vm with existing qcow2 image"
+    echo "  -build                build vm with existing iso image"
+    echo "  -stop                 stop vm"
+    echo "  -vpn                  ssh into vm with private vpn (default: serveo)"
+}
+
+# start vm with existing qcow2 image

@@ -1,0 +1,28 @@
+#!/usr/bin/expect -f
+exp_internal 1
+
+set username [lindex $argv 0];
+set password [lindex $argv 1];
+set vm_path  [lindex $argv 2];
+set rand_val [lindex $argv 3];
+
+set timeout -1
+
+spawn qemu-system-x86_64 -hda $vm_path -nographic
+
+# Login
+
+expect "login: "
+send "$username\r"
+
+expect "Password: "
+send "$password\r"
+
+expect "# "
+send "ssh -R $rand_val:22:localhost:22 serveo.net\r"
+
+expect "])? "
+send "yes\r"
+
+set timeout -1
+expect eof

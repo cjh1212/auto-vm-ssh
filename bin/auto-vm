@@ -1,0 +1,37 @@
+#!/bin/bash
+set -eu
+
+SCRIPTS_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+REPO_DIR="${SCRIPTS_DIR}/.."
+
+
+
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -start)
+            start_vm "$2"
+            shift # past argument
+            shift # past value
+            ;;
+        -stop)
+            stop_vm "$2"
+            shift 
+            shift 
+            ;;
+        -h|--help)
+            show_help
+            exit 0
+            ;;
+        *)    # Unknown option
+            echo "Error: Invalid option"
+            show_help
+            exit 1
+            ;;
+    esac
+done
+
+if [ $# -eq 0 ]; then
+    show_help
+fi
